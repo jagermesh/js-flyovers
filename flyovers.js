@@ -24,8 +24,8 @@
       .${componentClass}-instance {
         background-color:black;
         color:white;
-        padding: 5px 10px 5px 10px;
-        font-size:10pt;
+        padding: 10px 10px 10px 10px;
+        font-size: 14px;
         word-break: break-word;
         margin-bottom: 10px;
         border: 1px solid #999;
@@ -46,15 +46,16 @@
       }
       .${componentClass}-close-button {
         float: right;
-        font-size:10pt;
+        font-size: 14px;
         font-weight: bold;
         cursor: pointer;
         padding-left: 5px;
         padding-right: 5px;
       }
       .${componentClass}-title {
-        font-size: 14pt;
+        font-size: 18px;
         font-weight: bold;
+        padding-bottom: 10px;
       }
       .${componentClass}-show {
         transition: opacity 800ms;
@@ -140,14 +141,13 @@
 
       checkContainerVisibility();
 
-      let text = `
-      <div class="${componentClass}-close-button">&times;</div>
-      <div class="${componentClass}-title"></div>
-      ${content}
-    `;
+      let text = `<div class="${componentClass}-close-button">&times;</div>`;
+      if (title) {
+        text += `<div class="${componentClass}-title">${title}</div>`;
+      }
+      text += content;
 
       flyoverOverlay.innerHTML = text;
-      flyoverOverlay.querySelector(`.${componentClass}-title`).innerHTML = title;
 
       flyoverOverlay.querySelector(`.${componentClass}-close-button`).addEventListener('click', function() {
         flyoverOverlay.remove();
