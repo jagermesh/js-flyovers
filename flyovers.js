@@ -127,10 +127,6 @@
         }
       }, Object.assign(overrides, settings));
 
-      console.log(title);
-      console.log(content);
-      console.log(settings);
-
       let flyoverOverlay = document.createElement('div');
 
       flyoverOverlay.classList.add(`${componentClass}-instance`);
