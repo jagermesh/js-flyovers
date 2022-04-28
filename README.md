@@ -1,44 +1,49 @@
-# Smart Hint.
+# Flyovers
 
-Simple, lightweight pure JavaScript component that implement customizable re-positioning hint.
+Simple, lightweight pure JavaScript component that implement Growl style notifications.
 
 ## Demo
 
-https://jagermesh.github.io/js-smart-hint/
+https://jagermesh.github.io/js-flyovers/
 
 ## Usage:
 
 1) Include the script:
 
 ~~~
-<script type="text/javascript" src="smart-hint.js"></script>
+<script type="text/javascript" src="flyovers.js"></script>
 ~~~
 
-2) Create SmartHint instance
+2) Create Flyovers instance
 
 ~~~
-const hint = new SmartHint();
+const flyovers = new Flyovers();
 ~~~
 
-3) Attach where needed
+3) Show message
 
 ~~~
-hint.attach('.has-hint');
+flyovers.showMessage('Message 1',
+  'Attempts to prove it prompted substantial development in number theory, and over time Fermat Last Theorem gained prominence as an unsolved problem in mathematics');
+flyovers.showInfo('Info Permanent',
+  'Attempts to prove it prompted substantial development in number theory, and over time Fermat Last Theorem gained prominence as an unsolved problem in mathematics', {
+  permanent: true,
+});
+flyovers.showError('Error');
+flyovers.showSuccess('Success');
+flyovers.showWarning('Warning');
+flyovers.showInfo('Info');
 ~~~
 
 4) Customize if needed
 
 ~~~
-hint.attach('.has-custom-hint', {
-  getContent: function(selector) {
-    return new Promise(function(resolve) {
-      resolve('Hint Text');
-    });
-  },
-  beautify: function(hintOverlay, selector) {
-    hintOverlay.style.fontSize = `${Math.floor(Math.random() * 10)+8}pt`;
-    hintOverlay.style.backgroundColor = 'red';
-    hintOverlay.style.color = 'white';
+flyovers.showMessage('Message 2', {
+  timeout: 1000,
+  beautify: function(flyoverOverlay) {
+    flyoverOverlay.style.fontSize = `${Math.floor(Math.random() * 10)+8}pt`;
+    flyoverOverlay.style.backgroundColor = 'red';
+    flyoverOverlay.style.color = 'white';
   }
 });
 ~~~
