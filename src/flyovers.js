@@ -85,8 +85,10 @@
     }
 
     function scheduleForRemoval(flyoverOverlay) {
-      flyoverOverlay.classList.remove(`${componentClass}-show`);
-      flyoverOverlay.classList.add(`${componentClass}-hide`);
+      if (!flyoverOverlay.classList.contains(`${componentClass}-mouse-over`)) {
+        flyoverOverlay.classList.remove(`${componentClass}-show`);
+        flyoverOverlay.classList.add(`${componentClass}-hide`);
+      }
       flyoverOverlay.addEventListener('mouseenter', function() {
         flyoverOverlay.classList.add(`${componentClass}-show`);
         flyoverOverlay.classList.remove(`${componentClass}-hide`);
@@ -158,12 +160,20 @@
         flyoverOverlay.classList.add(`${componentClass}-show`);
         flyoverOverlay.classList.remove(`${componentClass}-hide`);
 
+        flyoverOverlay.addEventListener('mouseenter', function() {
+          flyoverOverlay.classList.add(`${componentClass}-mouse-over`);
+        });
+
+        flyoverOverlay.addEventListener('mouseleave', function() {
+          flyoverOverlay.classList.remove(`${componentClass}-mouse-over`);
+        });
+
         if (!params.permanent) {
           window.setTimeout(function() {
             scheduleForRemoval(flyoverOverlay)
           }, params.timeout);
         }
-      })
+      });
 
       return this;
     }
